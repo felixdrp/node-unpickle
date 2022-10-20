@@ -18,6 +18,7 @@ const opcodes = {
 	BINUNICODE: 0x58, // X
 	APPEND: 0x61, // a
 	APPENDS: 0x65, // e
+	BINPUT: 0x71, // "q"
 	SETITEM: 0x73, // s
 	SETITEMS: 0x75, // u
 	TUPLE2: 0x86,
@@ -134,6 +135,15 @@ class State {
 		this.stack.push(this.stack.pop().concat(items))
 	}
 
+	BINPUT () {
+		// i = this.read(1)[0]
+		i = this.buffer.readUInt8(this.position)[0]
+        if (i < 0) {
+            throw new Error('negative BINPUT argument')
+		}
+        this.memo[i] = this.stack[-1]
+	}
+
 	SETITEM () {
 		const value = this.stack.pop()
 		const key = this.stack.pop()
@@ -163,4 +173,3 @@ class State {
 		this.stopped = true
 	}
 }
-
