@@ -137,7 +137,7 @@ class State {
 
 	BINPUT () {
 		// i = this.read(1)[0]
-		i = this.buffer.readUInt8(this.position)[0]
+		const i = this.buffer.readUInt8(this.position)[0]
         if (i < 0) {
             throw new Error('negative BINPUT argument')
 		}
