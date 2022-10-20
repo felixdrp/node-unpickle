@@ -141,7 +141,7 @@ class State {
         if (i < 0) {
             throw new Error('negative BINPUT argument')
 		}
-        this.memo[i] = this.stack[-1]
+        this.memo[i] = this.stack.slice[-1]
 	}
 
 	SETITEM () {
